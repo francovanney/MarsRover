@@ -4,6 +4,7 @@ import { Container, Button, Spinner, Form } from "react-bootstrap"
 import RangeSlider from "react-bootstrap-range-slider"
 import styles from "./Gallery.module.scss"
 import getRoverImages from "../../api/nasaApi.js"
+import { motion } from "framer-motion" // Importa Framer Motion
 
 const Gallery = () => {
     const [selectedRover, setSelectedRover] = useState("curiosity")
@@ -37,6 +38,25 @@ const Gallery = () => {
         { value: "MINITES", label: "Miniature Thermal Emission Spectrometer " },
     ]
 
+    const handleLoadMore = async () => {
+        const nextPage = currentPage + 1
+        try {
+            setLoading(true)
+            const roverImages = await getRoverImages(
+                selectedRover,
+                nextPage,
+                selectedCamera,
+                selectedSol
+            )
+            setImages((prevImages) => [...prevImages, ...roverImages])
+            setCurrentPage(nextPage)
+            setLoading(false)
+        } catch (error) {
+            console.error("Error:", error.message)
+            setLoading(false)
+        }
+    }
+
     const handleSolIncrement = () => {
         setSelectedSol((prevSol) => prevSol + 1)
         if (solSelected && selectedSol + 1 !== 2890) {
@@ -66,48 +86,18 @@ const Gallery = () => {
         setSolSelected(!solSelected)
     }
 
-    const handleLoadMore = async () => {
-        const nextPage = currentPage + 1
-        try {
-            setLoading(true)
-            const roverImages = await getRoverImages(
-                selectedRover,
-                nextPage,
-                selectedCamera,
-                selectedSol
-            )
-            setImages((prevImages) => [...prevImages, ...roverImages])
-            setCurrentPage(nextPage)
-            setLoading(false)
-        } catch (error) {
-            console.error("Error:", error.message)
-            setLoading(false)
-        }
-    }
-
     const loadImages = async (roverName, page, camera, sol) => {
         if (!roverName) return
 
         try {
             setLoading(true)
             const startIndex = (page - 1) * IMAGES_PER_PAGE
-            let roverImages
-
-            if (earthDaySelected) {
-                roverImages = await getRoverImages(
-                    roverName,
-                    startIndex,
-                    camera,
-                    undefined
-                )
-            } else {
-                roverImages = await getRoverImages(
-                    roverName,
-                    startIndex,
-                    camera,
-                    sol
-                )
-            }
+            const roverImages = await getRoverImages(
+                roverName,
+                startIndex,
+                camera,
+                sol
+            )
 
             setImages(roverImages)
             setLoading(false)
@@ -122,19 +112,9 @@ const Gallery = () => {
         setCurrentPage(1)
         setNoImagesMessage("")
 
-        if (earthDaySelected) {
-            loadImages(selectedRover, 1, selectedCamera, undefined)
-        } else {
-            const solValue = solSelected ? 2890 : selectedSol
-            loadImages(selectedRover, 1, selectedCamera, solValue)
-        }
-    }, [
-        selectedRover,
-        selectedCamera,
-        selectedSol,
-        earthDaySelected,
-        solSelected,
-    ])
+        const solValue = solSelected ? 2890 : selectedSol
+        loadImages(selectedRover, 1, selectedCamera, solValue)
+    }, [selectedRover, selectedCamera, selectedSol, solSelected])
 
     return (
         <>
@@ -158,31 +138,38 @@ const Gallery = () => {
             </Container>
             <Container className={styles.rangeContainer}>
                 <h3>Sol Date: {solSelected ? 2890 : selectedSol}</h3>
-                <RangeSlider
+                <motion.div
                     className={styles.slider}
-                    value={selectedSol}
-                    onChange={handleSliderChange}
-                    min={0}
-                    max={3000}
-                    step={1}
-                    disabled={earthDaySelected || solSelected}
-                />
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                >
+                    <RangeSlider
+                        value={selectedSol}
+                        onChange={handleSliderChange}
+                        min={0}
+                        max={3000}
+                        step={1}
+                        disabled={solSelected}
+                    />
+                </motion.div>
             </Container>
             <Container>
-                <Button variant="primary" onClick={handleSolDecrement}>
+                <Button
+                    variant="primary"
+                    onClick={handleSolDecrement}
+                    disabled={solSelected}
+                >
                     -
                 </Button>{" "}
-                <Button variant="primary" onClick={handleSolIncrement}>
+                <Button
+                    variant="primary"
+                    onClick={handleSolIncrement}
+                    disabled={solSelected}
+                >
                     +
                 </Button>
             </Container>
             <Container className={styles.counter}>
-                <Form.Check
-                    type="checkbox"
-                    label="Buscar por 'Earth Day' date (2020-09-22)"
-                    checked={earthDaySelected}
-                    onChange={() => setEarthDaySelected(!earthDaySelected)}
-                />
                 <Form.Check
                     type="checkbox"
                     label="Buscar por 'Sol' date (2890)"
@@ -218,10 +205,11 @@ const Gallery = () => {
                         images.length >= IMAGES_PER_PAGE && (
                             <Container className="mt-4">
                                 <Button
+                                    className={styles.loadingButton}
                                     onClick={handleLoadMore}
                                     disabled={loading}
                                 >
-                                    Cargar más imágenes
+                                    Load more
                                 </Button>
                             </Container>
                         )
