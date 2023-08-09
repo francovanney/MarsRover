@@ -157,7 +157,9 @@ const Gallery = () => {
                 />
             </Container>
             <Container className={styles.rangeContainer}>
+                <h3>Sol Date: {solSelected ? 2890 : selectedSol}</h3>
                 <RangeSlider
+                    className={styles.slider}
                     value={selectedSol}
                     onChange={handleSliderChange}
                     min={0}
@@ -166,14 +168,15 @@ const Gallery = () => {
                     disabled={earthDaySelected || solSelected}
                 />
             </Container>
-            <Container className={styles.counter}>
+            <Container>
                 <Button variant="primary" onClick={handleSolDecrement}>
-                    Menos
+                    -
                 </Button>{" "}
                 <Button variant="primary" onClick={handleSolIncrement}>
-                    Más
+                    +
                 </Button>
-                <h3>{solSelected ? 2890 : selectedSol}</h3>
+            </Container>
+            <Container className={styles.counter}>
                 <Form.Check
                     type="checkbox"
                     label="Buscar por 'Earth Day' date (2020-09-22)"
