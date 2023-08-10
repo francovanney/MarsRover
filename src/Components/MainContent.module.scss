@@ -36,6 +36,5 @@ $duration: 3s; // Duración en segundos para cada ciclo de destello
             animation: flash $duration (2 / 8) * $duration infinite ease-in-out
                 alternate;
         }
-        // ... (continúa con los demás círculos, ajustando el valor de nth-child)
     }
 }

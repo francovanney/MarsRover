@@ -4,7 +4,7 @@ import { Container, Button, Spinner, Form } from "react-bootstrap"
 import RangeSlider from "react-bootstrap-range-slider"
 import styles from "./Gallery.module.scss"
 import getRoverImages from "../../api/nasaApi.js"
-import { motion } from "framer-motion" // Importa Framer Motion
+import { motion } from "framer-motion"
 
 const Gallery = () => {
     const [selectedRover, setSelectedRover] = useState("curiosity")
@@ -14,7 +14,6 @@ const Gallery = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [loading, setLoading] = useState(false)
     const [noImagesMessage, setNoImagesMessage] = useState("")
-    const [earthDaySelected, setEarthDaySelected] = useState(false)
     const [solSelected, setSolSelected] = useState(false)
 
     const IMAGES_PER_PAGE = 25
@@ -143,7 +142,7 @@ const Gallery = () => {
                 </Container>
             </Container>
             <Container className={styles.rangeContainer}>
-                <h3>Sol Date: {solSelected ? 2890 : selectedSol}</h3>
+                <h3>Actual Sol Date: {solSelected ? 2890 : selectedSol}</h3>
                 <motion.div
                     className={styles.slider}
                     initial={{ opacity: 0, x: -20 }}
@@ -165,6 +164,7 @@ const Gallery = () => {
                     variant="primary"
                     onClick={handleSolDecrement}
                     disabled={solSelected}
+                    title="Decrease Sol Date"
                 >
                     -
                 </Button>{" "}
@@ -173,6 +173,7 @@ const Gallery = () => {
                     variant="primary"
                     onClick={handleSolIncrement}
                     disabled={solSelected}
+                    title="Increase Sol Date"
                 >
                     +
                 </Button>
