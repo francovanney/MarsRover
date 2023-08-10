@@ -119,22 +119,28 @@ const Gallery = () => {
     return (
         <>
             <Container className={styles.selectsContainer}>
-                <ReactSelect
-                    options={roverOptions}
-                    onChange={(selectedOption) =>
-                        setSelectedRover(selectedOption.value)
-                    }
-                    defaultValue={roverOptions[0]}
-                    placeholder="Seleccione un rover"
-                />
-                <ReactSelect
-                    options={cameraOptions}
-                    onChange={(selectedOption) =>
-                        setSelectedCamera(selectedOption.value)
-                    }
-                    defaultValue={cameraOptions[0]}
-                    placeholder="Seleccione una cámara"
-                />
+                <Container>
+                    <h3 className={styles.title}>Rover</h3>
+                    <ReactSelect
+                        options={roverOptions}
+                        onChange={(selectedOption) =>
+                            setSelectedRover(selectedOption.value)
+                        }
+                        defaultValue={roverOptions[0]}
+                        placeholder="Select a Rover"
+                    />
+                </Container>
+                <Container>
+                    <h3 className={styles.title}>Camera</h3>
+                    <ReactSelect
+                        options={cameraOptions}
+                        onChange={(selectedOption) =>
+                            setSelectedCamera(selectedOption.value)
+                        }
+                        defaultValue={cameraOptions[0]}
+                        placeholder="Select a camera"
+                    />
+                </Container>
             </Container>
             <Container className={styles.rangeContainer}>
                 <h3>Sol Date: {solSelected ? 2890 : selectedSol}</h3>
@@ -155,6 +161,7 @@ const Gallery = () => {
             </Container>
             <Container>
                 <Button
+                    className={styles.rangeButtons}
                     variant="primary"
                     onClick={handleSolDecrement}
                     disabled={solSelected}
@@ -162,6 +169,7 @@ const Gallery = () => {
                     -
                 </Button>{" "}
                 <Button
+                    className={styles.rangeButtons}
                     variant="primary"
                     onClick={handleSolIncrement}
                     disabled={solSelected}
@@ -172,7 +180,7 @@ const Gallery = () => {
             <Container className={styles.counter}>
                 <Form.Check
                     type="checkbox"
-                    label="Buscar por 'Sol' date (2890)"
+                    label=" Go to Sol date (2890) "
                     checked={solSelected}
                     onChange={handleSolCheckboxChange}
                 />
@@ -181,12 +189,12 @@ const Gallery = () => {
                 <Container className={styles.imageGallery}>
                     {images.length === 0 && !loading && (
                         <p className={styles.noImagesMessage}>
-                            {noImagesMessage || "No existen imágenes"}
+                            {noImagesMessage || "No images"}
                         </p>
                     )}
                     {images.map((image, index) => (
                         <img
-                            width={200}
+                            width={180}
                             key={index}
                             src={image}
                             alt={`Imagen ${index}`}

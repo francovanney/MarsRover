@@ -14,8 +14,9 @@
     justify-content: center;
     width: 100%;
     gap: 20px;
-    margin-top: 20px;
     color: black;
+    font-size: .8em;
+    flex: 1;
 }
 
 .image {
@@ -31,6 +32,12 @@
     width: 45%;
 }
 
+.rangeButtons {
+    padding: 5px 10px;
+    margin: 0px 5px;
+    cursor: pointer;
+}
+
 .counter {
     margin-top: 30px;
 }
@@ -43,4 +50,9 @@
     cursor: pointer;
     padding: 15px 35px 15px 35px;
     margin-top: 3em;
+}
+
+.title {
+    color: white;
+    text-align: center;
 }

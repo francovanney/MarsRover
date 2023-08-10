@@ -4,7 +4,6 @@ import Gallery from "./Gallery/Gallery"
 import { motion } from "framer-motion"
 
 const MainContent = () => {
-
     const circles = [
         { cx: "47.679", cy: "12.57", r: ".45" },
         { cx: "52.299", cy: "13.17", r: ".45" },
@@ -55,15 +54,15 @@ const MainContent = () => {
         <>
             <section>
                 <Container className={styles.pageSection}>
-                    <h1>Mars Rover App</h1>
+                    <h1>Mars Rover Photos</h1>
                     <motion.svg
                         height="200"
                         viewBox="0 0 110 92"
                         width="200"
                         xmlns="http://www.w3.org/2000/svg"
-                        initial={{ opacity: 0 }} // Opcional: puedes agregar una animación de entrada inicial
-                        animate={{ opacity: 1 }} // Opcional: puedes agregar una animación de entrada inicial
-                        exit={{ opacity: 0 }} // Opcional: puedes agregar una animación de salida
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                     >
                         <circle cx="50.049" cy="45" fill="#0b3d91" r="40.14" />
                         <g fill="#fff">
@@ -76,14 +75,14 @@ const MainContent = () => {
                                     fill="#fff"
                                     initial={{ opacity: 0 }}
                                     animate={{
-                                        opacity: [0, 1, 0], // Fading in and out
+                                        opacity: [0, 1, 0],
                                         transition: {
                                             duration: 2,
                                             times: [0, 0.5, 1],
                                             repeat: Infinity,
                                         },
                                     }}
-                                    style={{ originX: "50%", originY: "50%" }} // For smoother animation
+                                    style={{ originX: "50%", originY: "50%" }}
                                 />
                             ))}
                             {paths.map((path, index) => (
@@ -93,7 +92,7 @@ const MainContent = () => {
                                     fill="#fc3d21"
                                     initial={{ opacity: 0 }}
                                     animate={{
-                                        opacity: [0, 1, 0], // Fading in and out
+                                        opacity: [0, 1, 0],
                                         transition: {
                                             duration: 2,
                                             times: [0, 0.5, 1],
@@ -106,10 +105,10 @@ const MainContent = () => {
                                 d="M59.568 35.385c-4.667 1.814-9.219 3.433-13.06 4.635-7.805 2.444-29.16 9.06-42.06 17.4l1.08.42c7.86-4.44 12.969-5.835 17.88-7.38 5.34-1.68 22.603-5.72 30.42-7.92 2.641-.743 5.734-1.716 9.01-2.9-.762-1.063-1.566-2.129-2.412-3.193C60.143 36.088 59.856 35.734 59.568 35.385zM65.27 43.244c-1.13.763-2.077 1.372-2.74 1.756-3.84 2.22-22.561 15-26.82 17.94s-16.08 14.1-19.56 17.34l-.12 1.319c11.22-10.08 14.74-12.566 19.2-15.959 5.52-4.2 16.939-11.97 20.82-14.46 3.71-2.38 7.056-4.569 10.059-6.572-.049-.082-.098-.164-.147-.247C65.736 43.99 65.505 43.618 65.27 43.244zM82.809 24.72c-5.466 3.204-14.081 7.071-22.439 10.352.2.245.399.492.597.741.934 1.176 1.815 2.36 2.644 3.545 6.57-2.42 13.779-5.668 19.499-9.599-2.725 2.582-11.734 9.315-17.227 13.068.283.461.557.922.822 1.381 8.322-5.569 13.922-9.668 17.185-12.409 4.5-3.78 14.76-12.24 18.66-23.58C95.709 16.92 87.621 21.899 82.809 24.72z"
                                 fill="transparent"
                                 stroke="#fc3d21"
-                                strokeWidth="1" // Ancho del trazo
-                                strokeLinecap="round" // Estilo del final del trazo
-                                strokeLinejoin="round" // Estilo de unión de trazos
-                                initial={{ pathLength: 0, fill: "#fc3d21" }} // Configuración de inicio de la animación
+                                strokeWidth="1"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                initial={{ pathLength: 0, fill: "#fc3d21" }}
                                 animate={{
                                     pathLength: 1,
                                     fill: "#fc3d21",
@@ -117,23 +116,23 @@ const MainContent = () => {
                                         duration: 5,
                                         repeat: Infinity,
                                     },
-                                }} // Animación en loop
+                                }}
                             />
                             <motion.path
                                 d="M44.884 54.939c-.885-1.114-2.109-2.606-3.028-3.763-1.229-1.547-2.366-3.11-3.408-4.671-.34.085-.679.17-1.018.255 1.258 1.963 2.655 3.923 4.177 5.839 1.112 1.4 2.123 2.527 2.641 3.228.105.142.313.456.594.874.324-.22.651-.442.981-.666C45.504 55.688 45.189 55.323 44.884 54.939zM51.344 60.803c-.727-.688-2.49-1.837-4.325-3.561-.405.278-.814.56-1.224.844 1.185 1.67 2.799 3.721 4.063 4.319C51.762 63.307 52.275 61.685 51.344 60.803zM60.967 35.813c-10.492-13.206-23.309-20.461-28.835-16.07-4.292 3.41-2.53 13.376 3.386 23.845.306-.105.609-.208.909-.31-5.971-10.2-7.605-19.679-3.557-22.896 5.087-4.042 17.37 3.241 27.558 16.064 2.109 2.654 3.963 5.318 5.533 7.915 6.012 9.95 7.857 18.948 3.703 22.621-1.271 1.124-5.155 1.565-10.243-.725-.071.089.043.33.132.389 4.392 1.766 8.599 2.439 10.723.752C75.38 63.342 71.459 49.019 60.967 35.813z"
                                 fill="transparent"
                                 stroke="#fff"
-                                strokeWidth="1" // Ancho del trazo
-                                strokeLinecap="round" // Estilo del final del trazo
-                                strokeLinejoin="round" // Estilo de unión de trazos
-                                initial={{ pathLength: 0 }} // Configuración de inicio de la animación
+                                strokeWidth="1"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                initial={{ pathLength: 0 }}
                                 animate={{
                                     pathLength: 2,
                                     transition: {
                                         duration: 7,
                                         repeat: Infinity,
                                     },
-                                }} // Animación rápida e infinita
+                                }}
                             />{" "}
                             <path d="M15.969 37.38h6.72l5.64 9.57c0 0 0-6.93 0-7.47 0-.84-1.065-1.935-1.44-2.1.45 0 4.38 0 4.65 0-.285.075-1.2 1.185-1.2 2.1 0 .45 0 10.5 0 10.98 0 .675.975 1.605 1.44 1.965h-6.48l-5.73-9.615c0 0 0 7.17 0 7.56 0 .75.735 1.47 1.5 2.085h-4.95c.705-.3 1.38-1.245 1.44-1.995s0-10.425 0-10.845C17.559 38.7 16.674 37.95 15.969 37.38z" />
                             <path d="M77.439 52.425h8.94c-.495-.12-1.05-.705-1.35-1.485-.3-.78-5.04-13.56-5.04-13.56H76.59c-.964.694-1.997 1.426-3.1 2.197-.003.028-.006.056-.011.083-.148.9-2.808 10.534-2.97 11.01-.225.66-1.38 1.395-1.845 1.785h4.815c-.48-.54-.87-1.065-.78-1.665.09-.6.36-1.8.36-1.8h4.98c.225.6.393 1.139.48 1.65C78.624 51.255 77.994 51.945 77.439 52.425zM73.509 47.07l1.68-5.49 2.22 5.49H73.509zM72.752 37.928c.247-.182.495-.365.742-.548h-1.305C72.319 37.5 72.534 37.689 72.752 37.928z" />
