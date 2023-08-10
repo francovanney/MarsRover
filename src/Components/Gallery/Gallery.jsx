@@ -25,7 +25,7 @@ const Gallery = () => {
     ]
 
     const cameraOptions = [
-        { value: "ALL", label: "Todas las cámaras" },
+        { value: "ALL", label: "All cameras" },
         { value: "FHAZ", label: "Front Hazard Avoidance Camera" },
         { value: "RHAZ", label: "Rear Hazard Avoidance Camera" },
         { value: "MAST", label: "Mast Camera" },

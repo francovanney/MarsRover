@@ -62,6 +62,7 @@ const MainContent = () => {
                         title="Go to NASA Website"
                     >
                         <motion.svg
+                            className={styles.nasaLogo}
                             height="200"
                             viewBox="0 0 110 92"
                             width="200"

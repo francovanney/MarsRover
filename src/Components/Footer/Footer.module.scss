@@ -1,0 +1,20 @@
+.footer {
+    height: 40px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link {
+    margin-left: 4px;
+    margin-right: 4px;
+    color: #5ac2d5;
+    transition: .5s all;
+    &:hover {
+        transition: .5s all;
+        opacity: .8;
+    }
+}

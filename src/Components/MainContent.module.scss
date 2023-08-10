@@ -38,3 +38,12 @@ $duration: 3s; // Duración en segundos para cada ciclo de destello
         }
     }
 }
+
+.nasaLogo {
+    transition: 1s all;
+    &:hover {
+        transition: 1.5s all;
+        opacity: 0.5;
+        width: 400px;
+    }
+}
